@@ -32,3 +32,15 @@ pnpm pack:tool
 ## Release
 
 打 `v*` tag 后 GitHub Actions 发布 `tool-forge-template-source.zip`，供主体仓 `template-pin.json` 钉死拉取。
+
+## 发布到 GitHub
+
+本机已完成首个 commit 与本地 `tool-forge-template-source.zip`（sha256 见主体 `src-tauri/template-pin.json`）。在有 GitHub 凭证的环境执行：
+
+```bash
+git push -u origin main
+git tag -a v0.1.0 -m "v0.1.0"   # 若尚未打 tag
+git push origin v0.1.0
+```
+
+`release.yml` 会上传 `tool-forge-template-source.zip`。若 Actions 产物摘要与 pin 不一致，用新摘要更新主体 `template-pin.json` 后执行 `pnpm template:fetch`。

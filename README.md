@@ -25,7 +25,7 @@ pnpm pack:tool
 
 ## 前置
 
-- Node 20+ / pnpm
+- Node.js ≥22.12 / pnpm 10
 - Rust toolchain + `wasm32-unknown-unknown`（`pnpm build:wasm` 会尝试安装目标）
 - `wasm-bindgen` CLI（脚本在缺失时尝试 `cargo install`）
 

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+dist-tool/
+target/
+src/wasm-pkg/
+*.zip
+.DS_Store
+license-report.md

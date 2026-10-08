@@ -1,0 +1,12 @@
+---
+description: 外部工具交付物布局
+alwaysApply: true
+---
+
+# 交付
+
+- 安装目录名必须等于 `manifest.id`。
+- `entry` 必须以 `ui/` 开头。
+- 不要填写 `origin`；不要使用保留 id `shell`。
+- `pnpm pack:tool` 产出 `dist-tool/<id>/{manifest.json,ui/**}`，拷贝到平台数据目录 `tools/<id>/`。
+- 不要把 exe/dll/so 当作平台会执行的交付物。

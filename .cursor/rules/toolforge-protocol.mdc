@@ -1,0 +1,11 @@
+---
+description: Tool Forge 外部工具消息协议
+alwaysApply: true
+---
+
+# 协议
+
+- 所有消息带 `type: toolforge`、非空 `requestId`、合法 `direction`。
+- 收到 `invoke` 必须回复 `result`；可见 DOM 不能代替 result。
+- `postMessage` 目标优先 `http://127.0.0.1:17321` 或 `event.origin`。
+- 业务动作实现放在 `src/actions/`；协议细节放在 `src/lib/toolforge/`。

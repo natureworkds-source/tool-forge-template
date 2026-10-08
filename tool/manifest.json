@@ -1,0 +1,38 @@
+{
+  "id": "sample-tool",
+  "name": "示例工具",
+  "summary": "推荐外部工具模板：Vue + WASM，演示与平台壳层的消息交互。",
+  "version": "1.0.0",
+  "mark": "示例",
+  "group": "示例组",
+  "entry": "ui/index.html",
+  "developer": {
+    "name": "示例开发者",
+    "email": "dev@example.com"
+  },
+  "permissions": [],
+  "adSlots": [],
+  "actions": [
+    {
+      "id": "sample.run",
+      "title": "运行示例",
+      "description": "调用 WASM 领域逻辑并返回结构化结果",
+      "input": {
+        "type": "object",
+        "properties": {}
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "effects": []
+    }
+  ]
+}

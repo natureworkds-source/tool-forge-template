@@ -2,6 +2,8 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/src/wasm-pkg"
+# Keep CLI version identical to crates/tool-wasm → wasm-bindgen (workspace pin).
+WASM_BINDGEN_VERSION="0.2.129"
 mkdir -p "$OUT"
 cd "$ROOT/crates"
 rustup target add wasm32-unknown-unknown >/dev/null
@@ -12,10 +14,22 @@ if [[ ! -f "$WASM" ]]; then
   echo "missing wasm at $WASM" >&2
   exit 1
 fi
-if ! command -v wasm-bindgen >/dev/null 2>&1; then
-  cargo install wasm-bindgen-cli --version 0.2.100 --locked 2>/dev/null || cargo install wasm-bindgen-cli --version 0.2.100
+
+need_cli=1
+if command -v wasm-bindgen >/dev/null 2>&1; then
+  installed="$(wasm-bindgen --version 2>/dev/null | awk '{print $2}' || true)"
+  if [[ "$installed" == "$WASM_BINDGEN_VERSION" ]]; then
+    need_cli=0
+  else
+    echo "wasm-bindgen CLI is $installed; want $WASM_BINDGEN_VERSION — reinstalling" >&2
+  fi
 fi
-# Match the wasm-bindgen crate version used by the lockfile as closely as possible.
+if [[ "$need_cli" -eq 1 ]]; then
+  cargo install wasm-bindgen-cli --version "$WASM_BINDGEN_VERSION" --locked --force \
+    2>/dev/null \
+    || cargo install wasm-bindgen-cli --version "$WASM_BINDGEN_VERSION" --force
+fi
+
 wasm-bindgen \
   --target web \
   --out-dir "$OUT" \

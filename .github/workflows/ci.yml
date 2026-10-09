@@ -19,7 +19,7 @@ jobs:
         with:
           targets: wasm32-unknown-unknown
       - name: Install wasm-bindgen-cli
-        run: cargo install wasm-bindgen-cli --version 0.2.100 --locked
+        run: cargo install wasm-bindgen-cli --version 0.2.129 --locked
       - run: pnpm install
       - run: cargo test --manifest-path crates/Cargo.toml
       - run: pnpm test

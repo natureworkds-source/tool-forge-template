@@ -26,21 +26,25 @@ pnpm pack:tool
 ## 前置
 
 - Node.js ≥22.12 / pnpm 10
-- Rust toolchain + `wasm32-unknown-unknown`（`pnpm build:wasm` 会尝试安装目标）
-- `wasm-bindgen` CLI（脚本在缺失时尝试 `cargo install`）
+- Rust **stable**（仓库根 `rust-toolchain.toml` 钉死 channel；edition 2024）
+- 目标 `wasm32-unknown-unknown`（`pnpm build:wasm` 会尝试安装）
+- `wasm-bindgen` CLI **0.2.129**（与 crate pin 一致；版本不符时脚本会重装）
 
-## Release
+## 发版（release-please）
 
-打 `v*` tag 后 GitHub Actions 发布 `tool-forge-template-source.zip`，供主体仓 `template-pin.json` 钉死拉取。
+本仓用 [release-please](https://github.com/googleapis/release-please) 自动维护版本与 changelog：
 
-## 发布到 GitHub
+1. 向 `main` 提交 **Conventional Commits**（如 `feat:` / `fix:` / `docs:`）。
+2. `release-please.yml` 会开/更新 **Release PR**，自动改：
+   - `package.json` 的 `version`
+   - `crates/Cargo.toml` 的 `workspace.package.version`
+   - `CHANGELOG.md`
+   - `.release-please-manifest.json`
+3. **合并该 Release PR** 后：打 `vX.Y.Z` tag、创建 GitHub Release，并上传 `tool-forge-template-source.zip`。
 
-本机已完成首个 commit 与本地 `tool-forge-template-source.zip`（sha256 见主体 `src-tauri/template-pin.json`）。在有 GitHub 凭证的环境执行：
+不会回写主体仓的 `template-pin.json`；发版后请你在主体仓手动更新 pin（`tag` + zip `sha256`），再执行 `pnpm template:fetch`。
 
-```bash
-git push -u origin main
-git tag -a v0.1.0 -m "v0.1.0"   # 若尚未打 tag
-git push origin v0.1.0
-```
+说明：
 
-`release.yml` 会上传 `tool-forge-template-source.zip`。若 Actions 产物摘要与 pin 不一致，用新摘要更新主体 `template-pin.json` 后执行 `pnpm template:fetch`。
+- `tool/manifest.json` 的 `version` 是**示例工具**版本，不随模板脚手架自动 bump。
+- 已有基线 tag：`v0.1.0`。之后的版本由 Release PR 推进。

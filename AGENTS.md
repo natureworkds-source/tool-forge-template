@@ -26,3 +26,4 @@
 - 与 host 交互仅 `type: toolforge` 消息；文件/设置走壳层授权 API。
 - 不要把 sidecar 当作默认架构。
 - 错误记忆：同类失败第 2 次起更新同一条目；禁止写入密钥/token/个人信息。
+- 发版走 release-please：`main` 上用 Conventional Commits；合并 Release PR 后自动 bump + changelog + 上传源码 zip。不要手工改版本号抢跑；不要回写主体 `template-pin.json`。

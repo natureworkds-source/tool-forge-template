@@ -13,8 +13,10 @@
     "build": "pnpm build:wasm && vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "pack:tool": "tsx scripts/pack-tool.ts",
-    "pack:source": "bash scripts/pack-source-zip.sh"
+    "pack:tool": "pnpm build && tsx scripts/pack-tool.ts",
+    "pack:source": "bash scripts/pack-source-zip.sh",
+    "install:host": "bash scripts/install-to-host.sh",
+    "smoke:host": "node scripts/smoke-host.mjs"
   },
   "dependencies": {
     "vue": "^3.5.13"

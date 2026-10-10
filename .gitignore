@@ -2,7 +2,10 @@ node_modules/
 dist/
 dist-tool/
 target/
+crates/target/
 src/wasm-pkg/
 *.zip
+*.sqlite
 .DS_Store
 license-report.md
+.superpowers/

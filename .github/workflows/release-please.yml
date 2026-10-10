@@ -34,5 +34,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.release-please.outputs.tag_name }}
-          files: tool-forge-template-source.zip
+          # Name follows package.json "name" (see scripts/pack-source-zip.sh)
+          files: '*-source.zip'
           fail_on_unmatched_files: true

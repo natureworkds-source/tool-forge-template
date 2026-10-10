@@ -1,0 +1,79 @@
+/* 视觉令牌对齐主体；布局可按工具改写。 */
+
+:root {
+  --c-bg: #f4f6fb;
+  --c-surface: #ffffff;
+  --c-surface-2: #f8fafc;
+  --c-surface-3: #eef2f8;
+  --c-border: #e3e8f0;
+  --c-text: #0f172a;
+  --c-text-dim: #475569;
+  --c-text-mute: #8fa0b8;
+
+  --c-primary: #4f46e5;
+  --c-primary-hover: #4338ca;
+  --c-primary-active: #3730a3;
+  --c-primary-soft: #eef2ff;
+  --c-primary-text: #4f46e5;
+  --c-ring: rgba(79, 70, 229, 0.28);
+  --c-grad-from: #6366f1;
+  --c-grad-to: #0ea5e9;
+  --c-on-primary: #ffffff;
+
+  --font: 'Microsoft YaHei UI', 'PingFang SC', 'Hiragino Sans GB', 'Segoe UI',
+    'Noto Sans CJK SC', system-ui, -apple-system, sans-serif;
+}
+
+[data-mode='dark'] {
+  --c-bg: #0a0f1e;
+  --c-surface: #111827;
+  --c-surface-2: #161f33;
+  --c-surface-3: #1d2740;
+  --c-border: #232f4b;
+  --c-text: #e9eefb;
+  --c-text-dim: #a8b6d1;
+  --c-text-mute: #6d7c99;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--c-text);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  padding: 1.5rem;
+  max-width: 40rem;
+}
+
+.page h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  color: var(--c-primary-text);
+}
+
+.page code {
+  font-size: 0.9em;
+  background: var(--c-surface-3);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+.meta {
+  color: var(--c-text-dim);
+}

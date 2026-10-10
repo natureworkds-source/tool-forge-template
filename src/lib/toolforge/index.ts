@@ -40,13 +40,28 @@ export function replyResult(
   }
 }
 
-export function startToolforgeHostBridge(handler: InvokeHandler): void {
+export type HostThemeHandler = (input: { theme?: string; mode?: string }) => void
+
+/** 监听宿主 invoke；`host.theme` 单独回调，其余交给业务 handler。 */
+export function startToolforgeHostBridge(
+  handler: InvokeHandler,
+  onHostTheme?: HostThemeHandler,
+): void {
   window.addEventListener('message', (event) => {
     if (!isToolforge(event.data)) return
     if (event.data.direction !== 'invoke') return
     const { requestId, action, input } = event.data
     if (!action) {
       replyResult(requestId, { ok: false, error: '缺少 action' }, event.origin || HOST_ORIGIN)
+      return
+    }
+    if (action === 'host.theme') {
+      const body = (input && typeof input === 'object' ? input : {}) as {
+        theme?: string
+        mode?: string
+      }
+      onHostTheme?.(body)
+      replyResult(requestId, { ok: true, data: { ok: true } }, event.origin || HOST_ORIGIN)
       return
     }
     void handler(action, input ?? {}).then((result) => {

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/natureworkds-source/tool-forge-template/compare/v0.2.0...v0.3.0) (2026-10-11)
+
+
+### Features
+
+* add agent modularity and directory rules aligned with host ([102a00d](https://github.com/natureworkds-source/tool-forge-template/commit/102a00d391a20175318fa7c5b77bc3971519bf5a))
+
 ## [0.2.0](https://github.com/natureworkds-source/tool-forge-template/compare/v0.1.0...v0.2.0) (2026-10-10)
 
 

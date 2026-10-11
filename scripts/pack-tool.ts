@@ -9,9 +9,19 @@ import { fileURLToPath } from 'node:url'
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const manifestPath = resolve(root, 'tool/manifest.json')
 const distUi = resolve(root, 'dist')
-const manifest = JSON.parse(await readFile(manifestPath, 'utf8')) as { id: string; entry: string }
+const pkg = JSON.parse(await readFile(resolve(root, 'package.json'), 'utf8')) as { version: string }
+const manifest = JSON.parse(await readFile(manifestPath, 'utf8')) as {
+  id: string
+  entry: string
+  version: string
+}
 if (!manifest.id || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(manifest.id)) {
   throw new Error(`invalid manifest.id: ${manifest.id}`)
+}
+if (!pkg.version || manifest.version !== pkg.version) {
+  throw new Error(
+    `tool/manifest.json version (${manifest.version}) must match package.json (${pkg.version})`,
+  )
 }
 const outDir = resolve(root, 'dist-tool', manifest.id)
 await rm(outDir, { recursive: true, force: true })
@@ -19,6 +29,7 @@ await mkdir(resolve(outDir, 'ui'), { recursive: true })
 await cp(distUi, resolve(outDir, 'ui'), { recursive: true })
 const packedManifest = {
   ...manifest,
+  version: pkg.version,
   entry: manifest.entry.startsWith('ui/') ? manifest.entry : `ui/${manifest.entry.replace(/^\.\//, '')}`,
 }
 // Vite emits index.html at dist root → ui/index.html after copy

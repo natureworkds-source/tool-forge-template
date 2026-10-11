@@ -85,7 +85,7 @@ Settings → Actions → General → Workflow permissions：
 
 说明：
 
-- `tool/manifest.json` 的 `version` 是**示例工具**版本，不随模板脚手架自动 bump。
+- `tool/manifest.json` 的 `version` 须与 `package.json` 一致；Release PR 会一并 bump（`extra-files`）。首页展示的是清单版本。
 - 已有基线 tag：`v0.1.0`。之后的版本由 Release PR 推进。
-- `pnpm pack:tool` 会先执行 `pnpm build`，避免把过期 `dist/` 打进交付物。
+- `pnpm pack:tool` 会先执行 `pnpm build`，并校验清单版本与 `package.json` 一致后再打包。
 - `pnpm pack:store` 会先 `pack:tool`，再产出商店用 `.tfpkg` + `.artifact.json`。

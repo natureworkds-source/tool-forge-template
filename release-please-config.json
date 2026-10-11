@@ -11,6 +11,11 @@
           "type": "toml",
           "path": "crates/Cargo.toml",
           "jsonpath": "$.workspace.package.version"
+        },
+        {
+          "type": "json",
+          "path": "tool/manifest.json",
+          "jsonpath": "$.version"
         }
       ]
     }

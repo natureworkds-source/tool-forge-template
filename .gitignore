@@ -1,6 +1,7 @@
 node_modules/
 dist/
 dist-tool/
+dist-store/
 target/
 crates/target/
 src/wasm-pkg/

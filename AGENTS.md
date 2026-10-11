@@ -21,6 +21,7 @@
 | WASM | `crates/tool-wasm` | 导出给前端的边界 |
 | 契约 | `tool/manifest.json` | 清单真源；不写 origin |
 | 交付 | `pnpm pack:tool` | `dist-tool/<id>/{manifest.json,ui/**}`（会先 build） |
+| 商店包 | `pnpm pack:store` | `dist-store/<id>-<ver>-universal.tfpkg` + `.artifact.json` |
 | 联调 | `docs/host-integration.md` | 安装到主体 `tools/`、桥 API、授权与主题 |
 
 目录纪律见 `.cursor/rules/directory-structure.mdc`；体量与拆薄见 `.cursor/rules/code-modularity.mdc` 与 `docs/agent/code-modularity.md`。

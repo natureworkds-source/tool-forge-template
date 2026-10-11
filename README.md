@@ -13,6 +13,16 @@ pnpm pack:tool
 
 将 `dist-tool/<id>/` 拷贝到平台数据目录的 `tools/<id>/`，重新打开首页即可看到工具。
 
+上架策展商店时额外打包 `.tfpkg`（zip，内容与 `dist-tool/<id>/` 一致）：
+
+```bash
+pnpm pack:store
+# → dist-store/<id>-<version>-universal.tfpkg
+# → dist-store/<id>-<version>-universal.artifact.json  （含 sha256/size；url 上传 Release 后自行填入）
+```
+
+把 `.tfpkg`（与可选的 `.artifact.json`）挂到自有 GitHub/Gitee Release，再向 `toolforge-store` 提 Issue/PR。本地联调仍用 `pack:tool` / `install:host`。
+
 与主工程联调节奏见 [`docs/host-integration.md`](docs/host-integration.md)：
 
 ```bash
@@ -78,3 +88,4 @@ Settings → Actions → General → Workflow permissions：
 - `tool/manifest.json` 的 `version` 是**示例工具**版本，不随模板脚手架自动 bump。
 - 已有基线 tag：`v0.1.0`。之后的版本由 Release PR 推进。
 - `pnpm pack:tool` 会先执行 `pnpm build`，避免把过期 `dist/` 打进交付物。
+- `pnpm pack:store` 会先 `pack:tool`，再产出商店用 `.tfpkg` + `.artifact.json`。

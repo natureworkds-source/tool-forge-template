@@ -14,6 +14,7 @@
 | 清单 | **不要**写 `origin`；不要用保留 id `shell` |
 | 入口 | `entry` 必须以 `ui/` 开头 |
 | 产出 | `pnpm pack:tool` → `dist-tool/<id>/{manifest.json,ui/**}` |
+| 商店包 | `pnpm pack:store` → `dist-store/<id>-<version>-universal.tfpkg` + `.artifact.json` |
 | 安装位置 | `{appData}/tools/<id>/` |
 
 macOS 默认 `appData`：

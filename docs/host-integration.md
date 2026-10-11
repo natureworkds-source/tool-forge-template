@@ -4,6 +4,8 @@
 
 主工程惯例路径：`../nature-batch-geocoding-tool`（或你本机的 Tool Forge 主体仓）。
 
+主体前端壳按职责分域：`src/shell/{home,runtime,theme,ads}/`。外部工具只走 `toolforge` 协议与授权 API，**不要** import 主体 `shell/home` 等内部模块。工具工程自身的分层与体量纪律见本仓 `AGENTS.md`、`.cursor/rules/code-modularity.mdc`。
+
 ## 1. 交付形态
 
 | 项 | 要求 |

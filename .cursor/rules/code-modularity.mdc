@@ -1,0 +1,29 @@
+---
+description: 按职责拆薄与单文件体量门槛（views/actions/lib/crates/scripts）
+alwaysApply: true
+---
+
+# 代码拆薄与体量纪律
+
+说明见 `docs/agent/code-modularity.md`。
+
+## 适用范围
+
+`src/`、`crates/`、`scripts/` 下的 `.ts` / `.vue` / `.rs` 实现代码。测试文件可放宽一档，仍鼓励按场景拆分。
+
+## 体量门槛
+
+| 档位 | 约行数 | 要求 |
+| --- | --- | --- |
+| 舒适 | ≤400 | 默认目标 |
+| 软门槛 | >400 | 加功能前评估拆分；不拆须在改动说明里写清原因 |
+| 硬门槛 | >800 | 禁止继续堆新职责；本次应拆分或单列 Task，且不得再扩大该文件 |
+| 危急 | >1200 | 触碰即拆；禁止只加不拆 |
+
+## 拆分原则
+
+1. **按职责切**，禁止无意义碎文件或只为过线而切。
+2. **先落对层，再拆文件**：`src/views/`、`src/actions/`、`src/lib/toolforge/`、`src/lib/`、`crates/tool-core`、`crates/tool-wasm`、`scripts/`。
+3. **改动驱动**：优先拆当前任务要改的巨石文件，禁止无关大爆炸重构。
+4. **保持分层**：views 不拼裸 postMessage；协议在 toolforge SDK；业务动作在 actions；纯逻辑优先 crates。
+5. **分 PR**：搬目录与拆逻辑分开，便于审查。

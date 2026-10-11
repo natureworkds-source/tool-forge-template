@@ -1,0 +1,31 @@
+---
+description: 外部工具模板目录落点纪律；禁止错层堆文件
+alwaysApply: true
+---
+
+# 目录架构与落点纪律
+
+本仓是**外部工具脚手架**，不是平台本体。平台壳层分域（`home` / `runtime` / `theme` / `ads`）见主体仓；本仓只约束工具工程内部落点。
+
+## 分层心智模型
+
+| 层 | 路径 | 职责 |
+| --- | --- | --- |
+| UI | `src/views/` | 展示；不直接拼裸 postMessage |
+| Actions | `src/actions/` | 实现 manifest.actions |
+| Protocol | `src/lib/toolforge/` | invoke/result/request（含 `host.theme`） |
+| Theme | `src/lib/theme.ts` 等 | 跟主体品牌色与 mode |
+| Domain | `crates/tool-core` | 纯 Rust 逻辑 |
+| WASM | `crates/tool-wasm` | 导出给前端的边界 |
+| 契约 | `tool/manifest.json` | 清单真源；不写 origin |
+| Agent | `AGENTS.md`、`docs/agent/`、`.cursor/rules/` | Agent 入口与规则 |
+| 联调 | `docs/host-integration.md`、`scripts/` | 安装到宿主、打包 |
+
+## 硬约束
+
+1. 无当前任务依据时，禁止随意新增仓库顶层目录。
+2. 禁止错层：协议细节进 views、业务动作塞进 toolforge SDK、原生 exe/dll 当默认交付物等。
+3. 新脚本优先放入 `scripts/`；交付布局见 `delivery-layout.mdc`。
+4. 遵守 `.gitignore`；不把临时报告当业务资产提交。
+5. 单文件体量见 `code-modularity.mdc`（约 400 / 800 / 1200）。
+6. 拿不准落点时先问人，对照 `AGENTS.md`「分层」表。

@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.4.0](https://github.com/natureworkds/tool-forge-template/compare/v0.3.0...v0.4.0) (2026-10-14)
+
+
+### Features
+
+* add pack:store for marketplace .tfpkg packages ([93bdcda](https://github.com/natureworkds/tool-forge-template/commit/93bdcdac73c397fb15e821ee86a313b20510b609))
+
+
+### Bug Fixes
+
+* **ci:** build wasm before tests and verify pack:store ([2a18772](https://github.com/natureworkds/tool-forge-template/commit/2a1877279c78bf3203ad6f82b9379dfdf4b1dc10))
+* keep sample manifest version aligned with package.json ([b014398](https://github.com/natureworkds/tool-forge-template/commit/b0143985b854409b44329905809e3187b840d05c))
+
 ## [0.3.0](https://github.com/natureworkds-source/tool-forge-template/compare/v0.2.0...v0.3.0) (2026-10-11)
 
 

@@ -2,7 +2,7 @@
   "id": "sample-tool",
   "name": "示例工具",
   "summary": "推荐外部工具模板：Vue + WASM，演示与平台壳层的消息交互。",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "mark": "示例",
   "group": "示例组",
   "entry": "ui/index.html",
